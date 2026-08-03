@@ -85,20 +85,20 @@
 - [x] 다크모드 대응 여부 결정 및 적용 — 결정: 별도 토글 없이 시스템 설정(`prefers-color-scheme`) 기반 자동 다크모드만 지원, Tailwind `dark:` 클래스로 전 컴포넌트 적용
 
 ## 6. 카카오맵 연동 (14)
-- [ ] 카카오 디벨로퍼스 앱 등록 및 REST/JS 키 발급 (사용자 액션 필요 — 안내 문서화)
-- [ ] `.env.local`에 `KAKAO_REST_API_KEY`, `NEXT_PUBLIC_KAKAO_JS_KEY` 추가
-- [ ] `src/lib/kakao.ts` 작성 — 키워드 장소 검색 함수 (서버 전용)
-- [ ] `src/app/api/kakao/search/route.ts` 작성 (GET, 검색어 파라미터, `KAKAO_REST_API_KEY` 사용)
-- [ ] 카카오 API 에러/쿼터 초과 처리 및 사용자 안내 메시지
-- [ ] 검색 결과 캐싱 전략 검토 (호출량 절감, 리스크 관리)
-- [ ] 클라이언트 검색창 컴포넌트 (디바운스 + `AbortController`로 이전 요청 취소)
-- [ ] 검색 결과 리스트 UI (이름/주소/카테고리 표시)
-- [ ] `next/script`로 Kakao Maps JS SDK 로드
-- [ ] 지도 임베드 컴포넌트 (`KakaoMapEmbed`, lat/lng 마커 표시)
-- [ ] JS 키 도메인 제한 설정 안내 (카카오 콘솔, 배포 도메인 등록 포함)
-- [ ] 검색 API 요청 속도 제한/디바운스 서버측 방어 검토
-- [ ] 카카오 응답 필드 매핑 유틸 작성 (place_name→name, x/y→lng/lat 등)
-- [ ] 별점 필드 부재에 대한 UI 문구 확정 ("카카오맵에서 별점 보기" 링크)
+- [x] 카카오 디벨로퍼스 앱 등록 및 REST/JS 키 발급 (사용자 액션 필요 — 안내 문서화)
+- [x] `.env.local`에 `KAKAO_REST_API_KEY`, `NEXT_PUBLIC_KAKAO_JS_KEY` 추가
+- [x] `src/lib/kakao.ts` 작성 — 키워드 장소 검색 함수 (서버 전용)
+- [x] `src/app/api/kakao/search/route.ts` 작성 (GET, 검색어 파라미터, `KAKAO_REST_API_KEY` 사용)
+- [x] 카카오 API 에러/쿼터 초과 처리 및 사용자 안내 메시지 (`KakaoApiError`, 401/429/기타 상태별 메시지)
+- [x] 검색 결과 캐싱 전략 검토 — 결정: MVP에서는 캐싱 없음(내부 저트래픽 도구라 호출량이 적어 복잡도 대비 이득이 적음)
+- [x] 클라이언트 검색창 컴포넌트 (디바운스 + `AbortController`로 이전 요청 취소)
+- [x] 검색 결과 리스트 UI (이름/주소/카테고리 표시)
+- [x] `next/script`로 Kakao Maps JS SDK 로드
+- [x] 지도 임베드 컴포넌트 (`KakaoMapEmbed`, lat/lng 마커 표시)
+- [x] JS 키 도메인 제한 설정 안내 (카카오 콘솔, 배포 도메인 등록 포함)
+- [x] 검색 API 요청 속도 제한/디바운스 서버측 방어 검토 — 결정: 클라이언트 300ms 디바운스 + 검색어 길이(2~50자) 검증으로 대응, IP 단위 rate limit은 MVP에서 제외
+- [x] 카카오 응답 필드 매핑 유틸 작성 (place_name→name, x/y→lng/lat 등)
+- [x] 별점 필드 부재에 대한 UI 문구 확정 ("카카오맵에서 별점·리뷰 보기" 링크, `KakaoMapEmbed`에 구현)
 
 ## 7. 식당 풀 화면 (12)
 - [ ] `src/app/(app)/restaurants/page.tsx` 작성 (등록된 식당 목록)
@@ -214,4 +214,4 @@
 
 ---
 
-**총 항목 수**: 약 200개 (완료 71개 / 남은 작업 약 129개)
+**총 항목 수**: 약 200개 (완료 85개 / 남은 작업 약 115개)
