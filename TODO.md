@@ -101,18 +101,18 @@
 - [x] 별점 필드 부재에 대한 UI 문구 확정 ("카카오맵에서 별점·리뷰 보기" 링크, `KakaoMapEmbed`에 구현)
 
 ## 7. 식당 풀 화면 (12)
-- [ ] `src/app/(app)/restaurants/page.tsx` 작성 (등록된 식당 목록)
-- [ ] `src/app/(app)/restaurants/add/actions.ts` — `addRestaurantAction` (`kakao_place_id` 기준 upsert)
-- [ ] 식당 추가 폼 UI (검색 결과에서 "추가" 버튼)
-- [ ] 중복 추가 방지 UX (이미 등록된 식당은 "추가됨" 표시)
-- [ ] `src/app/(app)/restaurants/[id]/page.tsx` 작성 (상세 화면)
-- [ ] 상세 화면에 "카카오맵에서 별점 보기" 링크 (`place_url`)
-- [ ] 상세 화면 지도 임베드 연결
-- [ ] 식당 목록 검색/필터 UI (이름 검색)
-- [ ] 빈 목록 상태 UI ("아직 등록된 식당이 없어요")
-- [ ] 식당 카테고리별 필터/정렬 UI
-- [ ] 식당 등록자 표시 (`created_by` → 프로필 이름)
-- [ ] 식당 목록 페이지네이션/무한 스크롤 필요 여부 결정
+- [x] `src/app/(app)/restaurants/page.tsx` 작성 (등록된 식당 목록)
+- [x] `addRestaurantAction` (`kakao_place_id` 기준 upsert) — 별도 `/add` 페이지 없이 `src/app/(app)/restaurants/actions.ts`에 작성, 목록 페이지에서 바로 호출
+- [x] 식당 추가 폼 UI (검색 결과에서 "선택" 버튼 → `add-restaurant-form.tsx`가 `KakaoSearchBox` + `addRestaurantAction` 연결)
+- [x] 중복 추가 방지 UX (이미 등록된 식당은 "추가됨" 비활성 버튼으로 표시 — `KakaoSearchBox`의 `existingPlaceIds` prop)
+- [x] `src/app/(app)/restaurants/[id]/page.tsx` 작성 (상세 화면)
+- [x] 상세 화면에 "카카오맵에서 별점·리뷰 보기" 링크 (`place_url`, `KakaoMapEmbed` 재사용)
+- [x] 상세 화면 지도 임베드 연결
+- [x] 식당 목록 검색/필터 UI (이름 검색, GET 폼 기반 `?q=`)
+- [x] 빈 목록 상태 UI ("아직 등록된 식당이 없어요" / 필터 조건에 맞는 식당 없음 문구 분리)
+- [x] 식당 카테고리별 필터/정렬 UI — 카테고리 드롭다운 필터만 제공, 정렬은 등록일 최신순으로 고정(별도 정렬 UI는 MVP에서 제외하기로 결정)
+- [x] 식당 등록자 표시 (`created_by` → 프로필 이름, 목록/상세 모두 적용 — 타 조직 등록자는 RLS로 이름이 안 보일 수 있음, 정상 동작)
+- [x] 식당 목록 페이지네이션/무한 스크롤 필요 여부 결정 — 결정: MVP에서는 없음(등록 식당 수가 적을 것으로 예상), 데이터 늘어나면 재검토
 
 ## 8. 투표 생성 (10)
 - [ ] `src/app/(app)/votes/new/page.tsx` 작성
@@ -214,4 +214,4 @@
 
 ---
 
-**총 항목 수**: 176개 (완료 71개 / 남은 작업 105개)
+**총 항목 수**: 176개 (완료 83개 / 남은 작업 93개)

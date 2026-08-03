@@ -17,8 +17,10 @@ export type KakaoSearchResult = {
 
 export function KakaoSearchBox({
   onSelect,
+  existingPlaceIds = [],
 }: {
   onSelect: (place: KakaoSearchResult) => void;
+  existingPlaceIds?: string[];
 }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<KakaoSearchResult[]>([]);
@@ -84,28 +86,32 @@ export function KakaoSearchBox({
 
       {showResults && results.length > 0 && (
         <ul className="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800">
-          {results.map((place) => (
-            <li
-              key={place.kakaoPlaceId}
-              className="flex items-center justify-between gap-3 py-2"
-            >
-              <div className="flex flex-col">
-                <span className="text-sm font-medium">{place.name}</span>
-                <span className="text-xs text-neutral-500">
-                  {place.category ? `${place.category} · ` : ""}
-                  {place.address}
-                </span>
-              </div>
-              <Button
-                type="button"
-                variant="ghost"
-                className="shrink-0 px-0 py-0"
-                onClick={() => onSelect(place)}
+          {results.map((place) => {
+            const isAdded = existingPlaceIds.includes(place.kakaoPlaceId);
+            return (
+              <li
+                key={place.kakaoPlaceId}
+                className="flex items-center justify-between gap-3 py-2"
               >
-                선택
-              </Button>
-            </li>
-          ))}
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium">{place.name}</span>
+                  <span className="text-xs text-neutral-500">
+                    {place.category ? `${place.category} · ` : ""}
+                    {place.address}
+                  </span>
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  disabled={isAdded}
+                  className="shrink-0 px-0 py-0"
+                  onClick={() => onSelect(place)}
+                >
+                  {isAdded ? "추가됨" : "선택"}
+                </Button>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
