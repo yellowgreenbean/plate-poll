@@ -54,7 +54,7 @@
 - [x] `src/app/(auth)/login/page.tsx` 작성
 - [x] `src/app/(auth)/login/actions.ts` — `signInAction`
 - [x] 로그인 실패 에러 메시지 UI (잘못된 비밀번호 등)
-- [ ] 로그아웃 Server Action + 네비게이션 바 연결 — `signOutAction`(`src/app/(auth)/actions.ts`)은 작성 완료, 네비게이션 바는 5번 섹션에서 연결 예정
+- [x] 로그아웃 Server Action + 네비게이션 바 연결 — `signOutAction`(`src/app/(auth)/actions.ts`), 5번 섹션의 `nav-bar.tsx`에서 연결 완료
 - [x] 비밀번호 재설정(찾기) 플로우 필요 여부 결정 및 구현 — 결정: MVP 범위 제외, 필요 시 추후 추가
 - [x] `(auth)` 라우트 그룹 공통 레이아웃 (로고/서비스 소개 카피)
 - [x] `useActionState` 기반 로그인/가입 폼 pending 상태 처리
@@ -214,4 +214,4 @@
 
 ---
 
-**총 항목 수**: 약 200개 (완료 85개 / 남은 작업 약 115개)
+**총 항목 수**: 176개 (완료 71개 / 남은 작업 105개)
