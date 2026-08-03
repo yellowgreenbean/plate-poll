@@ -61,14 +61,14 @@
 - [x] Server Action 내부에서 이메일 도메인 형식 등 서버측 재검증
 
 ## 4. 온보딩 (조직/부서 매칭) (8)
-- [ ] `src/app/onboarding/page.tsx` 작성 — 로그인 사용자 이메일 도메인 기준 조직 조회 UI
-- [ ] 같은 조직의 기존 부서 목록 드롭다운 UI
-- [ ] "새 부서 만들기" 자유 입력 필드 UI
-- [ ] `src/app/onboarding/actions.ts` — `completeSignupAction` (`complete_signup` RPC 호출)
-- [ ] 온보딩 완료 후 `/votes`로 리다이렉트
-- [ ] 이미 프로필이 있는 사용자가 `/onboarding` 재접근 시 리다이렉트 처리
-- [ ] 신규 조직 자동 생성 시 "새로운 회사가 등록되었습니다" 안내 UX
-- [ ] 온보딩 폼 검증 (부서명 공백/중복 처리)
+- [x] `src/app/onboarding/page.tsx` 작성 — 로그인 사용자 이메일 도메인 기준 조직 조회 UI
+- [x] 같은 조직의 기존 부서 목록 드롭다운 UI
+- [x] "새 부서 만들기" 자유 입력 필드 UI
+- [x] `src/app/onboarding/actions.ts` — `completeSignupAction` (`complete_signup` RPC 호출)
+- [x] 온보딩 완료 후 `/votes`로 리다이렉트 (`/votes` 페이지는 9번 섹션에서 구현 예정 — 그 전까지는 404)
+- [x] 이미 프로필이 있는 사용자가 `/onboarding` 재접근 시 리다이렉트 처리
+- [x] 신규 조직 자동 생성 시 "새로운 회사가 등록되었습니다" 안내 UX
+- [x] 온보딩 폼 검증 (부서명 공백/중복 처리 — 드롭다운/새 부서 중 하나 필수, 공백 trim, 중복 부서명은 RPC의 `on conflict`로 기존 부서 재사용)
 
 ## 5. 공통 레이아웃 · 네비게이션 · 인가 (12)
 - [ ] `src/proxy.ts` 작성 (세션 쿠키 optimistic 체크, Next 16 `proxy` 컨벤션 준수)
@@ -214,4 +214,4 @@
 
 ---
 
-**총 항목 수**: 약 200개 (완료 51개 / 남은 작업 약 149개)
+**총 항목 수**: 약 200개 (완료 59개 / 남은 작업 약 141개)
