@@ -1,3 +1,5 @@
+import { Card } from "@/components/ui/card";
+
 export default function AuthLayout({
   children,
 }: Readonly<{
@@ -9,9 +11,7 @@ export default function AuthLayout({
         <h1 className="text-2xl font-bold">오늘뭐먹지</h1>
         <p className="text-sm text-neutral-500">사내 점심 투표 서비스</p>
       </div>
-      <div className="w-full max-w-sm rounded-xl border border-neutral-200 p-6 shadow-sm dark:border-neutral-800">
-        {children}
-      </div>
+      <Card>{children}</Card>
     </div>
   );
 }

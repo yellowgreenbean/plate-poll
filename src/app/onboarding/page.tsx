@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { OnboardingForm } from "./onboarding-form";
+import { Card } from "@/components/ui/card";
 
 export default async function OnboardingPage() {
   const supabase = await createClient();
@@ -49,13 +50,13 @@ export default async function OnboardingPage() {
           부서를 선택하면 팀 투표를 바로 시작할 수 있어요
         </p>
       </div>
-      <div className="w-full max-w-sm rounded-xl border border-neutral-200 p-6 shadow-sm dark:border-neutral-800">
+      <Card>
         <OnboardingForm
           domain={domain}
           organizationName={organization?.name ?? null}
           departments={departments}
         />
-      </div>
+      </Card>
     </div>
   );
 }
