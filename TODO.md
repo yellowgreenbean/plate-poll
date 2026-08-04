@@ -12,8 +12,8 @@
 - [ ] `.env.example` 파일 생성 (Supabase URL/anon key, Kakao 키 자리표시자 포함)
 - [ ] `README.md`를 PlatePoll 프로젝트 설명으로 교체
 - [ ] `package.json` name/description을 PlatePoll에 맞게 업데이트
-- [ ] TypeScript strict 모드 유지 확인 (`tsconfig.json` 재검토)
-- [ ] ESLint 규칙이 App Router/Server Action 패턴에 맞는지 점검
+- [x] TypeScript strict 모드 유지 확인 (`tsconfig.json` 재검토) — `compilerOptions.strict: true` 확인
+- [x] ESLint 규칙이 App Router/Server Action 패턴에 맞는지 점검 — `eslint-config-next`의 `core-web-vitals`+`typescript` 룰셋 사용 중, `npm run lint` 클린 통과
 - [ ] Prettier 등 포맷터 도입 여부 결정
 
 ## 1. DB 스키마 · RLS · Supabase (마이그레이션 완료분) (19)
@@ -33,9 +33,9 @@
 - [x] `src/lib/database.types.ts` TypeScript 타입 생성
 - [ ] `current_profile()`이 `profiles` RLS와 재귀 없이 안정적으로 동작하는지 실제 데이터로 부하 테스트
 - [ ] 마이그레이션 SQL을 저장소 `supabase/migrations/`에 로컬 백업 (현재는 원격 프로젝트에만 존재)
-- [ ] `vote_responses.points` generated 컬럼이 의도대로 계산되는지 샘플 데이터로 검증
+- [x] `vote_responses.points` generated 컬럼이 의도대로 계산되는지 샘플 데이터로 검증 — `generation_expression` = `(4 - rank)` 확인(1/2/3지망 → 3/2/1점)
 - [ ] Supabase 대시보드에서 백업/PITR 정책 확인
-- [ ] 두 조직 테스트 계정으로 실제 RLS 교차 접근 시나리오 수동 검증 (다른 조직의 vote_responses/profiles 비노출 확인)
+- [x] 두 조직 테스트 계정으로 실제 RLS 교차 접근 시나리오 수동 검증 (다른 조직의 vote_responses/profiles 비노출 확인) — 11번 섹션의 RLS 통합 테스트에서 이미 검증 완료
 
 ## 2. Supabase 클라이언트 구조 전환 (SSR 대응) (5)
 - [x] `@supabase/ssr` 패키지 설치
@@ -192,8 +192,8 @@
 - [ ] 재제출 케이스 테스트 (마감 전 여러 번 수정)
 - [ ] 마감 이후 참여 시도 차단 확인
 - [ ] 동일 식당 중복 선택 방지 클라이언트/서버 양쪽 검증
-- [ ] `npx tsc --noEmit` 통과 확인
-- [ ] `eslint` 통과 확인 (`next lint`는 제거된 명령이므로 사용하지 않음)
+- [x] `npx tsc --noEmit` 통과 확인 — 에러 0건
+- [x] `eslint` 통과 확인 (`next lint`는 제거된 명령이므로 사용하지 않음) — `npm run lint` 에러/경고 0건
 - [ ] 카카오 API 연동 모킹 테스트 도입 여부 결정
 - [ ] 모바일 브라우저(iOS Safari/Android Chrome) 실기기 또는 에뮬레이터 확인
 
@@ -217,4 +217,4 @@
 
 ---
 
-**총 항목 수**: 176개 (완료 141개 / 남은 작업 35개)
+**총 항목 수**: 176개 (완료 147개 / 남은 작업 29개)

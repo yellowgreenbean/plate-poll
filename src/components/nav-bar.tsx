@@ -20,7 +20,7 @@ export function NavBar({ email }: { email: string }) {
     <header className="border-b border-neutral-200 dark:border-neutral-800">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
         <Link href="/votes" className="font-bold">
-          🍚 오늘뭐먹지
+          🍽️ 민주주의 정식
         </Link>
 
         <nav className="hidden items-center gap-6 sm:flex">
