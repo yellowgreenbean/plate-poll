@@ -161,16 +161,16 @@
 - [x] 랭킹 Top N만 표시할지 전체 표시할지 UX 결정 — 결정: 상위 10곳만 표시, 초과 시 안내 문구
 
 ## 11. 에러 처리 · 검증 · 보안 강화 (10)
-- [ ] 모든 Server Action에서 `auth.uid()` 기반 재검증 로직 일관성 점검
-- [ ] 폼 제출 시 `useActionState` 기반 pending/에러 상태 공통 패턴 정립
-- [ ] Server Action 입력 검증 스키마 도구 도입 여부 결정 (예: Zod)
-- [ ] 투표 제출 남용 방지 rate limiting 검토
-- [ ] 카카오 API 키가 클라이언트 번들에 노출되지 않는지 빌드 결과 점검
-- [ ] RLS 정책 통합 테스트 — 타 조직 계정으로 `votes`/`vote_responses`/`profiles` 교차 접근 시도
-- [ ] `get_advisors` 재실행하여 애플리케이션 코드 추가 후 신규 경고 확인
-- [ ] Server Action 1MB 바디 크기 제한 관련 대용량 입력(예: 다수 후보 등록) 케이스 점검
-- [ ] Server Action 재배포 시 "Failed to find Server Action" 대응 정책 확인 (encryption key 로테이션)
-- [ ] 온보딩/투표 생성 RPC의 SQL Injection/입력 검증 재점검 (RPC 파라미터 바인딩 기반이라 안전한지 재확인)
+- [x] 모든 Server Action에서 `auth.uid()` 기반 재검증 로직 일관성 점검 — 전수 점검 중 실제 결함 1건 발견/수정: `cancelVoteAction`이 RLS(`votes_update_own`)에만 의존해 소유자가 아니어도 "조용히 성공"(0건 매칭, 에러 없음)하던 것을 소유권 명시 체크로 수정
+- [x] 폼 제출 시 `useActionState` 기반 pending/에러 상태 공통 패턴 정립 — 결정: `<form action={fn}>`으로 제출하는 폼은 `useActionState`, 검색결과 선택처럼 즉시 실행되는 액션은 `useTransition` + 수동 상태로 통일(두 패턴을 용도별로 구분해서 사용, 억지 통합 안 함)
+- [x] Server Action 입력 검증 스키마 도구 도입 여부 결정 (예: Zod) — 결정: 현재 규모(폼당 필드 2~4개)에서는 수동 검증으로 충분, Zod 등은 폼이 늘어나면 재검토
+- [x] 투표 제출 남용 방지 rate limiting 검토 — 결정: MVP 제외. 인증된 내부 사용자 대상이고 부서 범위로 이미 제한되어 있어 악용 유인/파급력이 낮음
+- [x] 카카오 API 키가 클라이언트 번들에 노출되지 않는지 빌드 결과 점검 — 실제 프로덕션 빌드(`.next/static`)를 grep해서 확인: `KAKAO_REST_API_KEY` 값/변수명 0건, `NEXT_PUBLIC_KAKAO_JS_KEY` 값은 1건(의도대로 공개) 확인
+- [x] RLS 정책 통합 테스트 — 서로 다른 조직 계정 2개를 만들어 실제 JWT로 PostgREST에 직접 요청: `votes`/`vote_responses`/`profiles`는 타 조직 데이터 0건(ID 직접 조회도 차단), `organizations`와 `get_rankings` RPC는 의도대로 타 조직 데이터도 조회됨을 확인 후 테스트 데이터 정리
+- [x] `get_advisors` 재실행하여 애플리케이션 코드 추가 후 신규 경고 확인 — security는 의도된 WARN(“authenticated는 RPC 실행 가능”)만 남음, performance는 unused_index INFO 3건뿐(사용량 적어서 발생, 정상)
+- [x] Server Action 1MB 바디 크기 제한 관련 대용량 입력(예: 다수 후보 등록) 케이스 점검 — 분석 결과 현재 폼의 최대 payload(체크박스 다중선택 등)가 1MB에 비해 훨씬 작아 실질적 위험 없음
+- [x] Server Action 재배포 시 "Failed to find Server Action" 대응 정책 확인 — 정책: 배포 시 `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY`를 Vercel 환경변수에 고정값으로 설정해 배포 간 액션 ID 안정성 확보 (14번 섹션에서 실제 적용)
+- [x] 온보딩/투표 생성 RPC의 SQL Injection/입력 검증 재점검 — 6개 RPC 정의(`pg_get_functiondef`)를 다시 읽어 확인: 전부 파라미터 바인딩만 사용하고 `EXECUTE`/`format()` 등 동적 SQL 조합이 전혀 없어 인젝션 표면 없음
 
 ## 12. 반응형 · UI 폴리싱 (8)
 - [ ] 모바일 뷰포트 대응 전반 점검 (사내 메신저 링크 접속 가정)
@@ -214,4 +214,4 @@
 
 ---
 
-**총 항목 수**: 176개 (완료 123개 / 남은 작업 53개)
+**총 항목 수**: 176개 (완료 133개 / 남은 작업 43개)
