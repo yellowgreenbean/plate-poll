@@ -24,8 +24,8 @@ export async function signUpAction(
   }
 
   const origin =
-    (await headers()).get("origin") ??
     process.env.NEXT_PUBLIC_SITE_URL ??
+    (await headers()).get("origin") ??
     "http://localhost:3000";
 
   const supabase = await createClient();
