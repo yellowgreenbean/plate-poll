@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { AddRestaurantForm } from "./add-restaurant-form";
+import { LunchRecommender } from "./lunch-recommender";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/skeleton";
@@ -59,6 +60,7 @@ async function RestaurantsContent({
 
   return (
     <div className="animate-fade-in flex flex-col gap-6">
+      <LunchRecommender existingPlaceIds={existingPlaceIds} />
       <AddRestaurantForm existingPlaceIds={existingPlaceIds} />
 
       <form action="/restaurants" method="get" className="flex flex-wrap gap-2">

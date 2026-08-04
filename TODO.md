@@ -215,6 +215,23 @@
 - [ ] 향후 확장 아이디어(예약 연동, AI 추천 등) 별도 백로그로 분리 기록
 - [ ] 코드 전반에 대한 최종 셀프 코드리뷰
 
+## 16. AI 점심 추천 봇 (Gemini) (12)
+
+식당 화면에 한 줄 무드/상황 입력 → Gemini 추천 → 카카오맵 검색으로 실재 확인 후 등록하는 흐름. 계획 문서: `.claude/plans/streamed-singing-stream.md`.
+
+- [x] `@google/genai` SDK 설치
+- [x] `src/lib/gemini.ts` 작성 — `ai.models.generateContent` 사용(JSON 스키마 강제 출력, 에러 클래스/상태코드 매핑). 신규 Interactions API(`ai.interactions.create`)는 에러 응답 본문을 파싱하지 못해 원인 진단이 불가능해 안정적인 구버전 API로 전환함
+- [x] `src/app/api/gemini/recommend/route.ts` 작성 (POST, 입력 길이 검증 2~200자, 에러 매핑)
+- [x] `.env.local`에 `GEMINI_KEY` 추가 및 로컬 동작 확인 완료
+- [x] Vercel 프로젝트 환경변수에 `GEMINI_KEY` 등록(sensitive) 완료
+- [x] `src/app/(app)/restaurants/use-add-restaurant.ts` 공유 훅 추출 (기존 `add-restaurant-form.tsx`의 등록 로직 재사용)
+- [x] `add-restaurant-form.tsx`를 공유 훅 사용하도록 리팩터
+- [x] `kakao-search-box.tsx`에 `initialQuery` prop + "검색 결과 없음" empty state 추가
+- [x] `lunch-recommender.tsx` 컴포넌트 작성 (무드 입력 + 추천받기 버튼 + 4초 쿨다운 + 추천 카드 + 카드별 인라인 카카오 검색/등록)
+- [x] `restaurants/page.tsx`에 `LunchRecommender` 배치
+- [x] 로컬 수동 E2E 테스트 — 실제 키로 추천 정상 동작 확인(사용자 확인 완료). 존재하지 않는 장소/연속 클릭 쿨다운 등 세부 케이스는 추후 재확인
+- [x] `npx tsc --noEmit`/`npm run lint` 통과 확인 (빌드 산출물 `GEMINI_KEY` 노출 여부 grep은 배포 전 별도 확인 필요)
+
 ---
 
-**총 항목 수**: 176개 (완료 147개 / 남은 작업 29개)
+**총 항목 수**: 188개 (완료 161개 / 남은 작업 27개)

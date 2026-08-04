@@ -18,11 +18,13 @@ export type KakaoSearchResult = {
 export function KakaoSearchBox({
   onSelect,
   existingPlaceIds = [],
+  initialQuery = "",
 }: {
   onSelect: (place: KakaoSearchResult) => void;
   existingPlaceIds?: string[];
+  initialQuery?: string;
 }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
   const [results, setResults] = useState<KakaoSearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -84,6 +86,12 @@ export function KakaoSearchBox({
       )}
 
       {showResults && error && <p className="text-sm text-red-600">{error}</p>}
+
+      {showResults && !isLoading && !error && results.length === 0 && (
+        <p className="animate-fade-in text-sm text-neutral-500">
+          😕 카카오맵에서 찾을 수 없어요. 다른 검색어로 시도해보세요.
+        </p>
+      )}
 
       {showResults && results.length > 0 && (
         <ul className="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800">
