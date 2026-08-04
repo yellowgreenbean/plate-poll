@@ -8,7 +8,7 @@ type VoteResult = {
 
 export function VoteResultsList({ results }: { results: VoteResult[] }) {
   if (results.length === 0) {
-    return <p className="text-sm text-neutral-500">아직 득표 결과가 없어요.</p>;
+    return <p className="text-sm text-neutral-500">🗳️ 아직 득표 결과가 없어요.</p>;
   }
 
   const maxPoints = Math.max(1, ...results.map((result) => result.total_points));
@@ -25,7 +25,7 @@ export function VoteResultsList({ results }: { results: VoteResult[] }) {
           return (
             <li key={result.restaurant_id} className="flex flex-col gap-1">
               <div className="flex items-center justify-between text-sm">
-                <span className={isWinner ? "font-bold" : "font-medium"}>
+                <span className={isWinner ? "font-bold text-accent" : "font-medium"}>
                   {result.restaurant_name}
                   {isWinner && (
                     <span className="ml-2 text-xs font-normal text-neutral-500">
@@ -39,7 +39,7 @@ export function VoteResultsList({ results }: { results: VoteResult[] }) {
               </div>
               <div className="h-2 w-full rounded-full bg-neutral-200 dark:bg-neutral-800">
                 <div
-                  className="h-2 rounded-full bg-neutral-900 dark:bg-neutral-100"
+                  className={`h-2 rounded-full transition-all duration-300 ${isWinner ? "bg-accent" : "bg-neutral-900 dark:bg-neutral-100"}`}
                   style={{ width: `${widthPercent}%` }}
                 />
               </div>

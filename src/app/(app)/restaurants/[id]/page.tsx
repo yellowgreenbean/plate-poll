@@ -27,7 +27,7 @@ export default async function RestaurantDetailPage({
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="animate-fade-in flex flex-col gap-4">
       <div>
         <h1 className="text-xl font-bold">{restaurant.name}</h1>
         <p className="text-sm text-neutral-500">

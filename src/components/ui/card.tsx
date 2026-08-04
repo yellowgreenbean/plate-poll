@@ -7,7 +7,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`w-full max-w-sm rounded-xl border border-neutral-200 p-6 shadow-sm dark:border-neutral-800 ${className}`}
+      className={`animate-fade-in w-full max-w-sm rounded-xl border border-neutral-200 p-6 shadow-sm dark:border-neutral-800 ${className}`}
     >
       {children}
     </div>

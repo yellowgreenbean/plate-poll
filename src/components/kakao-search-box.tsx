@@ -71,6 +71,7 @@ export function KakaoSearchBox({
     <div className="flex flex-col gap-2">
       <Input
         type="text"
+        aria-label="카카오맵 식당 검색"
         placeholder="식당 이름으로 검색 (예: 김밥천국 강남점)"
         value={query}
         onChange={(event) => setQuery(event.target.value)}

@@ -20,7 +20,7 @@ export function NavBar({ email }: { email: string }) {
     <header className="border-b border-neutral-200 dark:border-neutral-800">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
         <Link href="/votes" className="font-bold">
-          오늘뭐먹지
+          🍚 오늘뭐먹지
         </Link>
 
         <nav className="hidden items-center gap-6 sm:flex">
@@ -28,11 +28,11 @@ export function NavBar({ email }: { email: string }) {
             <Link
               key={link.href}
               href={link.href}
-              className={
+              className={`text-sm transition-colors duration-150 ${
                 pathname?.startsWith(link.href)
-                  ? "text-sm font-medium"
-                  : "text-sm text-neutral-500"
-              }
+                  ? "font-medium text-accent"
+                  : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+              }`}
             >
               {link.label}
             </Link>
@@ -65,7 +65,9 @@ export function NavBar({ email }: { email: string }) {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-sm"
+              className={`text-sm transition-colors duration-150 ${
+                pathname?.startsWith(link.href) ? "font-medium text-accent" : ""
+              }`}
             >
               {link.label}
             </Link>

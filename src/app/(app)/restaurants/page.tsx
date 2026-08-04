@@ -1,10 +1,33 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { AddRestaurantForm } from "./add-restaurant-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/skeleton";
 
-export default async function RestaurantsPage({
+export default function RestaurantsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; category?: string }>;
+}) {
+  return (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h1 className="text-xl font-bold">식당</h1>
+        <p className="text-sm text-neutral-500">
+          카카오맵에서 검색해서 점심 후보 식당을 추가하세요.
+        </p>
+      </div>
+
+      <Suspense fallback={<RestaurantsSkeleton />}>
+        <RestaurantsContent searchParams={searchParams} />
+      </Suspense>
+    </div>
+  );
+}
+
+async function RestaurantsContent({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string; category?: string }>;
@@ -35,28 +58,23 @@ export default async function RestaurantsPage({
   const hasFilter = Boolean(q || category);
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-xl font-bold">식당</h1>
-        <p className="text-sm text-neutral-500">
-          카카오맵에서 검색해서 점심 후보 식당을 추가하세요.
-        </p>
-      </div>
-
+    <div className="animate-fade-in flex flex-col gap-6">
       <AddRestaurantForm existingPlaceIds={existingPlaceIds} />
 
       <form action="/restaurants" method="get" className="flex flex-wrap gap-2">
         <Input
           type="text"
           name="q"
+          aria-label="식당 이름 검색"
           placeholder="식당 이름 검색"
           defaultValue={q ?? ""}
           className="max-w-xs"
         />
         <select
           name="category"
+          aria-label="카테고리 필터"
           defaultValue={category ?? ""}
-          className="rounded-md border border-neutral-300 px-3 py-2 text-sm dark:border-neutral-700 dark:bg-neutral-900"
+          className="rounded-md border border-neutral-300 px-3 py-2 text-sm transition-colors duration-150 focus:border-accent dark:border-neutral-700 dark:bg-neutral-900"
         >
           <option value="">전체 카테고리</option>
           {categories.map((c) => (
@@ -71,10 +89,10 @@ export default async function RestaurantsPage({
       </form>
 
       {restaurants.length === 0 ? (
-        <p className="text-sm text-neutral-500">
+        <p className="animate-fade-in text-sm text-neutral-500">
           {hasFilter
-            ? "조건에 맞는 식당이 없어요."
-            : "아직 등록된 식당이 없어요. 위에서 검색해서 추가해보세요."}
+            ? "🍽️ 조건에 맞는 식당이 없어요."
+            : "🍽️ 아직 등록된 식당이 없어요. 위에서 검색해서 추가해보세요."}
         </p>
       ) : (
         <ul className="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800">
@@ -82,9 +100,11 @@ export default async function RestaurantsPage({
             <li key={restaurant.id} className="py-3">
               <Link
                 href={`/restaurants/${restaurant.id}`}
-                className="flex flex-col gap-1"
+                className="group flex flex-col gap-1"
               >
-                <span className="font-medium">{restaurant.name}</span>
+                <span className="font-medium transition-colors duration-150 group-hover:text-accent">
+                  {restaurant.name}
+                </span>
                 <span className="text-xs text-neutral-500">
                   {restaurant.category ? `${restaurant.category} · ` : ""}
                   {restaurant.address}
@@ -99,6 +119,21 @@ export default async function RestaurantsPage({
           ))}
         </ul>
       )}
+    </div>
+  );
+}
+
+function RestaurantsSkeleton() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Skeleton className="h-10 w-full" />
+      <div className="flex gap-2">
+        <Skeleton className="h-10 w-40" />
+        <Skeleton className="h-10 w-32" />
+      </div>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <Skeleton key={index} className="h-14 w-full" />
+      ))}
     </div>
   );
 }

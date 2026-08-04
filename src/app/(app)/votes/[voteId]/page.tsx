@@ -62,7 +62,7 @@ export default async function VoteDetailPage({
   const hasVoted = initialOptionIds.length > 0;
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="animate-fade-in flex flex-col gap-6">
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-2">
           <h1 className="text-xl font-bold">{vote.title || "제목 없는 투표"}</h1>

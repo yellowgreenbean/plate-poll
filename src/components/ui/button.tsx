@@ -4,8 +4,8 @@ type ButtonVariant = "primary" | "ghost";
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900",
-  ghost: "text-neutral-500 underline",
+    "bg-orange-700 text-white hover:bg-orange-800 dark:bg-orange-400 dark:text-neutral-950 dark:hover:bg-orange-300",
+  ghost: "text-accent underline hover:text-accent-hover",
 };
 
 export function Button({
@@ -15,7 +15,7 @@ export function Button({
 }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant }) {
   return (
     <button
-      className={`rounded-md px-3 py-2 text-sm font-medium disabled:opacity-50 ${VARIANT_CLASSES[variant]} ${className}`}
+      className={`rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50 ${VARIANT_CLASSES[variant]} ${className}`}
       {...props}
     />
   );

@@ -71,10 +71,10 @@ export function VoteParticipateForm({
               <button
                 type="button"
                 onClick={() => toggle(option.id)}
-                className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left text-sm ${
+                className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left text-sm transition-colors duration-150 ${
                   isSelected
-                    ? "border-neutral-900 dark:border-neutral-100"
-                    : "border-neutral-200 dark:border-neutral-800"
+                    ? "border-accent"
+                    : "border-neutral-200 hover:border-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700"
                 }`}
               >
                 <span>
@@ -84,7 +84,9 @@ export function VoteParticipateForm({
                   )}
                 </span>
                 {isSelected && (
-                  <span className="text-xs font-medium">{RANK_LABELS[rankIndex]}</span>
+                  <span className="text-xs font-medium text-accent">
+                    {RANK_LABELS[rankIndex]}
+                  </span>
                 )}
               </button>
             </li>

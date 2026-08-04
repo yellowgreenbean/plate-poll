@@ -44,7 +44,10 @@ export function LoginForm() {
       </Button>
       <p className="text-center text-sm text-neutral-500">
         아직 계정이 없으신가요?{" "}
-        <Link href="/signup" className="font-medium underline">
+        <Link
+          href="/signup"
+          className="font-medium text-accent underline transition-colors duration-150 hover:text-accent-hover"
+        >
           회원가입
         </Link>
       </p>

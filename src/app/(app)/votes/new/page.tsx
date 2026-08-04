@@ -14,9 +14,12 @@ export default async function NewVotePage() {
     return (
       <div className="flex flex-col items-center gap-4 py-12 text-center">
         <p className="text-sm text-neutral-500">
-          아직 등록된 식당이 없어요. 먼저 식당을 등록해주세요.
+          🍽️ 아직 등록된 식당이 없어요. 먼저 식당을 등록해주세요.
         </p>
-        <Link href="/restaurants" className="text-sm font-medium underline">
+        <Link
+          href="/restaurants"
+          className="text-sm font-medium text-accent underline transition-colors duration-150 hover:text-accent-hover"
+        >
           식당 등록하러 가기
         </Link>
       </div>

@@ -72,7 +72,7 @@ export function KakaoMapEmbed({
           href={placeUrl}
           target="_blank"
           rel="noreferrer"
-          className="text-sm font-medium underline"
+          className="text-sm font-medium text-accent underline transition-colors duration-150 hover:text-accent-hover"
         >
           카카오맵에서 별점·리뷰 보기
         </a>

@@ -73,8 +73,9 @@ export default async function RankingsPage({
           <input type="hidden" name="tab" value="other" />
           <select
             name="org"
+            aria-label="타 회사 선택"
             defaultValue={selectedOrgId ?? ""}
-            className="rounded-md border border-neutral-300 px-3 py-2 text-sm dark:border-neutral-700 dark:bg-neutral-900"
+            className="rounded-md border border-neutral-300 px-3 py-2 text-sm transition-colors duration-150 focus:border-accent dark:border-neutral-700 dark:bg-neutral-900"
           >
             {(otherOrgs ?? []).map((org) => (
               <option key={org.id} value={org.id}>
@@ -89,7 +90,7 @@ export default async function RankingsPage({
       )}
 
       {tab === "other" && (otherOrgs ?? []).length === 0 ? (
-        <p className="text-sm text-neutral-500">아직 다른 회사가 없어요.</p>
+        <p className="text-sm text-neutral-500">🏢 아직 다른 회사가 없어요.</p>
       ) : (
         <Suspense key={`${tab}-${selectedOrgId}`} fallback={<RankingsSkeleton />}>
           <RankingsData
@@ -164,11 +165,11 @@ function TabLink({
   return (
     <Link
       href={href}
-      className={
+      className={`px-3 py-2 text-sm transition-colors duration-150 ${
         active
-          ? "border-b-2 border-neutral-900 px-3 py-2 text-sm font-semibold dark:border-neutral-100"
-          : "px-3 py-2 text-sm text-neutral-500"
-      }
+          ? "border-b-2 border-accent font-semibold text-accent"
+          : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+      }`}
     >
       {children}
     </Link>
