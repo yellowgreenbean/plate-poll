@@ -107,7 +107,7 @@ export default async function VoteDetailPage({
       )}
 
       <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold text-neutral-500">득표 현황</h2>
+        <h2 className="text-sm font-semibold text-secondary">득표 현황</h2>
         <VoteResultsList results={results ?? []} />
       </div>
     </div>

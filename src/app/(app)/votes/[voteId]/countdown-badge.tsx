@@ -28,7 +28,7 @@ export function CountdownBadge({ closesAt }: { closesAt: string }) {
 
   return (
     <span
-      className={`text-xs font-medium ${isUrgent ? "text-red-600" : "text-neutral-500"}`}
+      className={`text-xs font-medium ${isUrgent ? "text-red-600" : "text-secondary"}`}
     >
       {label}
     </span>

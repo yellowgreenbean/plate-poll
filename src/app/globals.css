@@ -2,17 +2,24 @@
 @import "pretendard/dist/web/variable/pretendardvariable.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --accent: #c2410c;
-  --accent-hover: #9a3412;
+  /* Burnt Sienna / Ivory Sand / Stormy Sky / Sage Green palette */
+  --background: #f5efe7;
+  --foreground: #2b2018;
+  --card: #e4d6c5;
+  --accent: #984216;
+  --accent-hover: #7a3512;
+  --secondary: #546064;
+  --positive: #555950;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
+  --color-secondary: var(--secondary);
+  --color-positive: var(--positive);
   --font-sans: "Pretendard Variable", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -20,8 +27,11 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --accent: #fb923c;
-    --accent-hover: #fdba74;
+    --card: #241a12;
+    --accent: #bc8468;
+    --accent-hover: #c6967f;
+    --secondary: #a1acb1;
+    --positive: #aab09e;
   }
 }
 

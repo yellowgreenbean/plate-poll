@@ -76,7 +76,7 @@ async function VotesContent() {
 function VoteGroup({ title, votes }: { title: string; votes: VoteListItem[] }) {
   return (
     <div className="flex flex-col gap-2">
-      <h2 className="text-sm font-semibold text-neutral-500">{title}</h2>
+      <h2 className="text-sm font-semibold text-secondary">{title}</h2>
       <ul className="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800">
         {votes.map((vote) => (
           <li key={vote.id} className="py-3">

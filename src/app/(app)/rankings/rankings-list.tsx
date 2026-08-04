@@ -35,7 +35,7 @@ export function RankingsList({ results }: { results: RankingRow[] }) {
               >
                 <div className="flex items-center gap-3">
                   <span
-                    className={`w-6 text-sm font-semibold ${isTop ? "text-accent" : "text-neutral-500"}`}
+                    className={`w-6 text-sm font-semibold ${isTop ? "text-positive" : "text-neutral-500"}`}
                   >
                     {row.rnk}
                   </span>
